@@ -1,21 +1,27 @@
 const http = require("http");
 
+const data = { message: "Hello World!" };
+
 const server = http.createServer((req, res) => {
   console.log("request received", req.url);
-  
-  if(req.url == '/dog'){
+  if (req.url === "/dogs") {
     res.setHeader("Content-Type", "text/html");
-    res.write("<h1>Dog. woof</h1>");
-    res.end();
-  } else if(req.url == '/cat'){
-    res.setHeader("Content-Type", "text/html");
-    res.write("<h1>Cat. meow</h1>");
-    res.end();
-  }else{
-    res.setHeader("Content-Type", "text/html");
-    res.write("<h1>Hello World!!!!!!!</h1>");
-    res.end();
+    res.write(
+      "<img src='https://i.pinimg.com/originals/b9/7d/97/b97d976b20e9889918becf0f5f4e7cbd.jpg'>"
+    );
   }
+  if (req.url === "/cats") {
+    res.setHeader("Content-Type", "text/html");
+    res.write(
+      "<img src='https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1175550351.jpg'>"
+    );
+  }
+  if (req.url === "/hello") {
+    res.setHeader("Content-Type", "application/json");
+    res.write(JSON.stringify(data));
+  }
+
+  res.end();
 });
 
 server.listen(3000, () => {

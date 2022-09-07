@@ -1,13 +1,23 @@
 const http = require("http");
 
-const server = http.createServer((request, response) => {
-  console.log("A wild client appears!", request.url);
-
-  if (request.url === "/test") {
-    response.writeHead(200, { "Content-type": "text/html" });
-    response.write("<h1>Hello Client in test!!!!!!</h1>");
+const server = http.createServer((req, res) => {
+  console.log("request received", req.url);
+  
+  if(req.url == '/dog'){
+    res.setHeader("Content-Type", "text/html");
+    res.write("<h1>Dog. woof</h1>");
+    res.end();
+  } else if(req.url == '/cat'){
+    res.setHeader("Content-Type", "text/html");
+    res.write("<h1>Cat. meow</h1>");
+    res.end();
+  }else{
+    res.setHeader("Content-Type", "text/html");
+    res.write("<h1>Hello World!!!!!!!</h1>");
+    res.end();
   }
-  response.end();
 });
 
-server.listen(3000, () => console.log("Server is running at port 3000"));
+server.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});

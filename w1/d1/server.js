@@ -1,8 +1,18 @@
 const http = require("http");
 
 const data = { message: "Hello World!" };
-const users = { user1: {name: "Yuto"}, user2: {name: 'Gabriel'} };
-const products = { product1: "banana" };
+
+const users = [
+  { name: "John", age: 25 },
+  { name: "Jane", age: 30 },
+  { name: "Jim", age: 28 },
+];
+
+const products = [
+  { name: "Apple", price: 1.5 },
+  { name: "Orange", price: 2.5 },
+  { name: "Banana", price: 3.5 },
+];
 
 const server = http.createServer((req, res) => {
   console.log("request received", req.url);

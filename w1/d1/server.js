@@ -1,6 +1,8 @@
 const http = require("http");
 
 const data = { message: "Hello World!" };
+const users = { user1: {name: "Yuto"}, user2: {name: 'Gabriel'} };
+const products = { product1: "banana" };
 
 const server = http.createServer((req, res) => {
   console.log("request received", req.url);
@@ -20,6 +22,15 @@ const server = http.createServer((req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.write(JSON.stringify(data));
   }
+  if(req.url === '/users'){
+    res.setHeader("Content-Type", "application/json");
+    res.write(JSON.stringify(users))
+  }
+  if(req.url === '/products'){
+    res.setHeader("Content-Type", "application/json");
+    res,write(JSON.stringify(products))
+  }
+
 
   res.end();
 });

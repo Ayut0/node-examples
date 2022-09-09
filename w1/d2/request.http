@@ -1,17 +1,25 @@
-GET http://localhost:5000/users
-Content-Type: application/json
+# GET http://localhost:3001/users
 
-POST http://localhost:5000/postuser
+POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-    "name": "Yuto",
-    "country": "Japan",
-    "id": 4
-},
+    "name": "Vinicius",
+    "country":"Brazil"
+}
 
-PUT http://localhost:5000/updateuser
-Content-Type: application/json
+# PUT http://localhost:3001/users
+# Content-Type: application/json
 
-DELETE  http://localhost:5000/deleteuser
+# {
+#     "id":1,
+#     "name":"Arthur",
+#     "country": "Canada"
+# }
 
+# DELETE http://localhost:3001/users
+# Content-Type: application/json
+
+# {
+#     "id":1
+# }

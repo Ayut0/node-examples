@@ -1,19 +1,7 @@
 {
   "users": [
-    {
-      "name": "Arthur",
-      "country": "Brazil",
-      "id": 1
-    },
-    {
-      "name": "Nicolas",
-      "country": "Ecuador",
-      "id": 2
-    },
-    {
-      "name": "Megumi",
-      "country": "Japan",
-      "id": 3
-    }
+    { "id": 2, "name": "Nicolas", "country": "Ecuador" },
+    { "id": 3, "name": "Megumi", "country": "Japan" },
+    { "id": 4, "name": "Vinicius", "country": "Brazil" }
   ]
 }

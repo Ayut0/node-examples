@@ -6,6 +6,7 @@ const fs = require("fs");
 //   { name: "Nicolas", country: "Ecuador" },
 //   { name: "Megumi", country: "Japan" },
 // ];
+
 const server = http.createServer((request, response) => {
   console.log("url", request.url);
   if (request.url === "readFile") {
@@ -66,10 +67,25 @@ const server = http.createServer((request, response) => {
   }
   if (request.url === "/users") {
     console.log("method", request.method);
-    response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify({ users }));
-    response.end();
+
+    fs.readFile('users.json','utf-8', (error, data) =>{
+      if(error){
+        console.log('Error is occurring');
+        return
+      }else{
+        console.log('content file', data)
+        // response.writeHead(200, { "content-type": "application/json" });
+        response.setHeader("Content-Type", "application.json")
+        response.write(JSON.stringify({ data }));
+        response.end();
+      }
+    })
+  }
+  if(request.url === "/postuser"){
+    console.log("method", request.method);
+
+    fs.appendFile('user.json', )
   }
 });
 
-server.listen(3000, () => console.log("server runnning on 3000"));
+server.listen(3000, () => console.log("server running on 3000"));

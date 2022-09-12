@@ -15,4 +15,20 @@
  *
  */
 
+
+const express = require('express');
+const PORT = 8000;
+const app = express()
+const petRouter = require('./routes/pets')
+app.set('view engine', 'ejs')
+
+app.use('/pet', petRouter)
+
+app.get('/', (req, res) =>{
+    res.render('index', {text: 'Express'})
+})
+
+app.listen(PORT, () => console.log('Server is running on PORT 8000'))
+
+
 const pets = [{ name: "Zoey", age: 1, type: "dog" }];

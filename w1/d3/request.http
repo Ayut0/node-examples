@@ -1,0 +1,25 @@
+# GET http://localhost:5000/users
+
+# POST http://localhost:5000/users
+# Content-Type: application/json
+
+# {
+#     "name": "Arthur",
+#     "country":"Brazil"
+# }
+
+PUT http://localhost:5000/users;
+Content-Type: application/json
+
+{
+    "id":5,
+    "name":"Arthur",
+    "country": "Canada"
+}
+
+# DELETE http://localhost:5000/users;
+# Content-Type: application/json
+
+# {
+#     "id":1
+# }

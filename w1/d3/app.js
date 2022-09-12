@@ -1,68 +1,57 @@
-const express = require('express')
+const express = require("express");
 const fs = require("fs");
-const app = express()
-const PORT = 5000;
 const bodyParser = require("body-parser");
 
-app.use(express.json('./users.json'));
-app.use(bodyParser.json())
-// app.use(express.static('./users.json'));
+const server = express();
+server.use(bodyParser.json());
 
-//READ
-const read = () =>{
-    const data = fs.readFileSync('users.json', 'utf-8');
-    console.log(data);
-    return JSON.parse(data).users;
-}
+const getUsers = () => {
+  const data = fs.readFileSync("users.json", "utf-8");
+  console.log("data", data);
+  return JSON.parse(data).users;
+};
 
-//SAVE
-const save = (updatedUsers) =>{
-    fs.writeFileSync('users.json', JSON.stringify({users:updatedUsers}))
-    return {message: 'file updated'}
-}
+const updateUsers = (updatedUsers) => {
+  fs.writeFileSync("users.json", JSON.stringify({ users: updatedUsers }));
+};
 
-//GET
-app.get('/users', (req, res) =>{
-    console.log(req.method);
-    const users = read();
-    console.log(users);
-    res.json(users);
+server.get("/", (request, response) => {
+  response.send("Hello!");
 });
 
-//CREATE
-app.post('/users', (req, res) =>{
-    console.log(req.body);
-    let body = req.body;
-    const users = read()
-    const newUser = {id: users.length + 1, ...body};
-    const updatedUsers = [...users, newUser];
-    console.log(updatedUsers);
-    save(updatedUsers);
-    res.json(newUser)
-
+server.get("/users", (request, response) => {
+  const users = getUsers();
+  console.log("users", users);
+  response.json(users);
 });
 
-//UPDATE
-app.put('/users', (req, res) =>{
-    const users = read();
-    const updatedUser = { ...req.body };
-    const updatedUsers = users.map((user) => {
-        if(user.id === updatedUser.id){
-            return { ...updatedUser }
-        }
-        return user;
-    });
-    save(updatedUsers);
-    res.json({message: 'User is updated'})
-})
+server.post("/users", (request, response) => {
+  const users = getUsers();
+  console.log("body", request.body);
+  const newUser = { ...request.body, id: users.length + 1 };
+  const updatedUsers = [...users, newUser];
+  updateUsers(updatedUsers);
+  response.json(newUser);
+});
 
-//DELETE
-app.delete('/users', (req, res) => {
-    const users = read();
-    const updatedUsers = users.filter((user) =>{
-        return 
-    })
-})
+server.put("/users", (request, response) => {
+  const users = getUsers();
+  const updatedUser = { ...request.body };
+  const updatedUsers = users.map((user) => {
+    if (user.id === updatedUser.id) {
+      return updatedUser;
+    }
+    return user;
+  });
+  updateUsers(updatedUsers);
+  response.json({ message: "user updated" });
+});
 
+server.delete("/users", (request, response) => {
+  const users = getUsers();
+  const updatedUsers = users.filter((user) => user.id !== request.body.id);
+  updateUsers(updatedUsers);
+  response.json({ message: "User deleted" });
+});
 
-app.listen(PORT, () => console.log('server running on port 5000'))
+server.listen(5001, () => console.log("server running on port 5001"));

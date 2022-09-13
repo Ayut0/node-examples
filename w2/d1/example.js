@@ -7,6 +7,7 @@ server.use(express.urlencoded({ extended: true }));
 
 server.set("view engine", "ejs");
 
+
 const users = [
   { name: "Arthur", id: 1 },
   { name: "Mauricio", id: 2 },

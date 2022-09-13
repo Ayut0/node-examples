@@ -5,7 +5,8 @@
  * CREATE:  GET     /new        Form for new pet. Done
  * SAVE:    POST    /new        Create the new pet (handle submission.) Done
  * READ:    GET     /           Index of Pets (Displays All) Done
- * EDIT:    GET     /edit/:id   Render populated form. another form. Create a another ejs and action
+ * EDIT:    GET     /edit/:id   Render populated form. another form. Create a another ejs and action. 
+ * How to differentiate between create and edit? - change the action?
  * UPDATE:  POST    /edit/:id   Update pet resource (handle submission.)
  * DELETE:  POST    /delete/:id Remove pet resource.
  *
@@ -27,6 +28,7 @@ app.set('view engine', 'ejs');
 app.use('/pet', petRouter);
 
 let pets = [{ id: 1, name: "Zoey", age: 1, type: "dog" }];
+exports.pets = pets;
 
 //READ
 app.get('/', (req, res) =>{
@@ -50,19 +52,20 @@ app.post('/pets', (req, res) =>{
 })
 
 //EDIT
-app.post('/pets', (req, res) =>{
+app.post('/editPets', (req, res) =>{
     console.log('Edit pet register request')
     console.log('body', req.body);
     const updatedPet = { ...req.body }
     console.log(updatedPet)
     pets = pets.map((pet) =>{
         if(pet.id === updatedPet.id){
-            console.log(pet.id, updatedPet.id)
             return updatedPet
         }
+        console.log(pet.id, updatedPet.id)
         return pet;
     })
     res.render('index', {text: 'Pets list', pets});
+    console.log(pets);
     res.redirect('/');
 })
 

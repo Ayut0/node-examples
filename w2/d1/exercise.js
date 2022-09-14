@@ -26,6 +26,7 @@ app.set("view engine", "ejs");
 
 let pets = [{ id: 1, name: "Zoey", age: 1, type: "dog" }];
 
+
 app.get("/", (req, res) => {
   res.render("pets", { pets });
 });

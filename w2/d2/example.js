@@ -9,6 +9,7 @@ app.get("/login", (req, res) => {
   res.send("You are logged in");
 });
 
+
 app.get("/", (req, res) => {
   console.log("cookies", req.cookies);
   if (req.cookies.username) {

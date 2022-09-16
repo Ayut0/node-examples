@@ -8,9 +8,11 @@
   </head>
   <body>
     <h1>User Profile</h1>
-    <p>Name: <%= user.name %></p>
-    <p>Username: <%= user.username %></p>
-    <p>Password: <%= user.password %></p>
+    <ul>
+      <% profiles.forEach(profile => { %>
+        <li><%= profile.name %></li>
+      <% }) %>
+    </ul>
     <form action="/logout" method="post">
       <button>Logout</button>
     </form>

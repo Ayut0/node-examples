@@ -137,27 +137,146 @@ There are many modules/packages that are included that you can use without insta
 
 ## Importing and Exporting
 
-Node does not support ES6 import and export by default, so we have to use require and modules.exports to pass instances between files.
+Node does not support ES6 import and export by default, so we have to use require and `module.exports` to pass instances between files.
+
+### Exporting (ES5)
+
+Single variable:
 
 ```js
-// ES5
-const EventEmitter = require("events");
+// in myFunc.js file
+const myFunc = (text) => {
+  console.log(text);
+};
 
-module.exports = new EventEmitter();
+module.exports = myFunc;
 ```
 
-```js
-// ES6
-import EventEmitter from "events";
+Multiple variables:
 
-export default new EventEmitter();
+```js
+// in myFunc.js file
+const myFunc = (text) => {
+  console.log(text);
+};
+
+const myFunc2 = (a, b) => {
+  return a + b;
+};
+
+module.exports = { myFunc, myFunc2 };
+```
+
+### Importing (ES5)
+
+Single variable:
+
+```js
+// in index.js file
+const myFunc = require("./myFunc");
+
+myFunc("Hello World");
+```
+
+Multiple variables:
+
+```js
+// in index.js file
+const myFuncs = require("./myFunc");
+
+myFuncs.myFunc("Hello World");
+myFuncs.myFunc2(1, 2);
+```
+
+Or
+
+```js
+// in index.js file
+const { myFunc, myFunc2 } = require("./myFunc");
+
+myFunc("Hello World");
+myFunc2(1, 2);
+```
+
+### Exporting (ES6)
+
+Single variable:
+
+```js
+// in myFunc.js file
+const myFunc = (text) => {
+  console.log(text);
+};
+
+export default myFunc;
+```
+
+Multiple variables:
+
+```js
+// in myFunc.js file
+const myFunc = (text) => {
+  console.log(text);
+};
+
+const myFunc2 = (a, b) => {
+  return a + b;
+};
+
+export default { myFunc, myFunc2 };
+```
+
+Or
+
+```js
+// in myFunc.js file
+export const myFunc = (text) => {
+  console.log(text);
+};
+
+export const myFunc2 = (a, b) => {
+  return a + b;
+};
+```
+
+### Importing (ES6)
+
+Single variable:
+
+```js
+// import the module and store it in a variable
+import myFunc from "./myFunc";
+
+myFunc("Hello World");
+```
+
+Multiple variables:
+
+```js
+// in index.js file
+import myFuncs from "./myFunc";
+
+myFuncs.myFunc("Hello World");
+myFuncs.myFunc2(1, 2);
+```
+
+Or
+
+```js
+// in index.js file
+import { myFunc, myFunc2 } from "./myFunc";
+
+myFunc("Hello World");
+myFunc2(1, 2);
 ```
 
 ## How to create a server
 
 ```js
+// import the http module
 const http = require("http");
 
+// create a server
 const server = http
   .createServer((request, response) => {
     response.writeHead(200, { "Content-Type": "text/html" });

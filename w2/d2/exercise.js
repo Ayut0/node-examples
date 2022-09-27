@@ -6,30 +6,13 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register')
 const profileRouter = require('./routes/profile')
 
-const app = express();
-app.use(express.urlencoded({ extended: true }));
-// app.use(cookieParser());
-app.set("view engine", "ejs");
-
-app.use('/login', loginRouter);
-app.use('/register', registerRouter)
-app.use('/profile', profileRouter)
-
-app.get('/', (req, res) =>{
-  res.render('login')
-})
-
-
-app.get("/", (req, res) => {
-  res.render("register");
-});
-
 app.use(
   cookieSession({
-    name: "session",
+    name: "user",
     keys: ["key1", "key2"],
   })
 );
+
 const users = {
   test: {
     name: "Test",
@@ -94,4 +77,10 @@ app.post("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+app.set("view engine", "ejs");
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
+
+
+// app.use(cookieParser());
 app.listen(8080, () => console.log("server running 8080"));

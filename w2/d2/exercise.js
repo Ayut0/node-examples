@@ -12,7 +12,7 @@ app.use(
     keys: ["key1", "key2"],
   })
 );
-<<<<<<< HEAD
+
 const users = {
   test: {
     name: "Test",
@@ -76,11 +76,11 @@ app.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/login");
 });
-=======
+
 app.set("view engine", "ejs");
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
->>>>>>> upstream/afternoon
+
 
 // app.use(cookieParser());
 app.listen(8080, () => console.log("server running 8080"));

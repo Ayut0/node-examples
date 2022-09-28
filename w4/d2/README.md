@@ -79,7 +79,7 @@ DROP TABLE table_name;
 ## Exercises
 
 - [Relational queries in SQL](https://www.khanacademy.org/computing/computer-programming/sql/relational-queries-in-sql/)
-- [Modify data in SQL](https://www.khanacademy.org/computing/computer-programming/sql/modify-data-in-sql)
+- [Modify database in SQL](https://www.khanacademy.org/computing/computer-programming/sql#modifying-databases-with-sql)
 - [SQL Zoo](https://sqlzoo.net/wiki/SQL_Tutorial) - 6 and 7
 
 ## Resources

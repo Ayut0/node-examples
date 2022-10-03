@@ -1,5 +1,4 @@
 node_modules
-w5
 migrations
 queries*
 .env

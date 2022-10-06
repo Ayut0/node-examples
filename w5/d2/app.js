@@ -6,7 +6,7 @@ dotenv.config();
 const studentsRoutes = require('./routes/student-route')
 const app = express();
 const PORT = 5000;
-const mongooseUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hluunuq.mongodb.net/?retryWrites=true&w=majority`;
+const mongooseUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hluunuq.mongodb.net/PracticeMongo?retryWrites=true&w=majority`;
 app.use(bodyParser.json());
 
 app.use('/students', studentsRoutes);

@@ -124,3 +124,4 @@ socket.broadcast.to("room").emit("message", "Hello, world!");
 - Bonus: Create rooms for different games.
   - Use `socket.io` to create a room for each game.
   - Should we predefine the rooms, or should we create them dynamically?
+  - 

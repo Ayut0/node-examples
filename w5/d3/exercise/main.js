@@ -1,5 +1,36 @@
+/*
+client send some message or data -> socket.emit()
+server receives the message -> socket.on()
+server send message back to sender (1 client) -> socket.emit()
+server send message to all connected clients -> io.emit()
+server send message to all connected clients except for sender -> socket.broadcast.emit()
+client receives message from server -> socket.on()
+if server wants to filter by room -> io.to(room).emit || socket.to(room).emit || socket.to(room).broadcast
+send -> emit("event name", data)
+receive -> on("event name" (data) => {})
+*/
+
 // Function called whenever user tab on any box
+const socket = io();
+let flag = 1;
+const b1 = document.getElementById("b1").value;
+const boxes = document.querySelectorAll('.box')
+b1.addEventListener('click', (e) =>{
+  const value = flag === 1? 'X': '0';
+  socket.emit('click', {position: e.target.id, value: value})
+
+})
+
+socket.on('new_move', (click) =>{
+  document.getElementById(click.position).value = click.value;
+    document.getElementById(click.position).disabled = true;
+    flag = flag === 1? 'X': '0';
+    myfunc()
+})
+
+
 function myfunc() {
+
   // Setting DOM to all boxes or input field
   var b1, b2, b3, b4, b5, b6, b7, b8, b9;
   b1 = document.getElementById("b1").value;
@@ -379,3 +410,7 @@ function myfunc_11() {
     flag = 1;
   }
 }
+
+socket.on('panel', (panel) => {
+  
+})
